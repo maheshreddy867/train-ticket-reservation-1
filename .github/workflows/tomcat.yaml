@@ -14,11 +14,11 @@ jobs:
           uses: actions/checkout@v3
 
         # Set up java 
-        - name: set up jdk 11
+        - name: set up jdk 21
           uses: actions/setup-java@v3
           with: 
             distribution: 'temurin'
-            java-version:  '11'
+            java-version:  '21'
             
         #Build with  maven(update)
         - name: Build with maven
@@ -29,8 +29,9 @@ jobs:
           run: |
            - name: Deploy WAR to Tomcat
              run: |
-               curl -v -u ${{ secrets.TOMCAT_USER }}:${{ secrets.TOMCAT_PASSWORD }} \
-                -T target/TrainBook-1.0.0-SNAPSHOT.war "http://${{ secrets.TOMCAT_HOST }}/manager/text/deploy?path=/TrainBook-1.0.0-SNAPSHOT&update=true"
+               curl -v -u ${{secrets.TOMCAT_USER}}:${{secrets.TOMCAT_PASSWORD}} \
+                -T target/TrainBook-1.0.0-SNAPSHOT.war\
+                "http://${{ secrets.TOMCAT_HOST }}:8080/manager/text/deploy?path=/TrainBook&update=true"
 
         
    
