@@ -20,9 +20,18 @@ jobs:
             distribution: 'temurin'
             java-version:  '21'
             
-        #Build with  maven(update)
+        # Build with  maven(update)
         - name: Build with maven
           run: mvn clean package
+       # Build wuth sonarqube 
+        - name: Cache SonarQube packages
+          uses: actions/cache@v3
+          with:
+           path: ~/.sonar/cache
+           key: ${{ runner.os }}-sonar
+
+        - name: Run SonarQube Scanner
+          run: mvn sonar:sonar -Dsonar.host.url=http://your-sonarqube-server:9000 -Dsonar.login=${{ secrets.SONAR_TOKEN }}
           
         #Deploy WAR to Tomcat  
         - name: Deploy to tomcat
