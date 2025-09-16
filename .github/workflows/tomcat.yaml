@@ -35,7 +35,7 @@ jobs:
       # deploy to tomcat
       - name: deploy to tomcat
         run: |
-          curl -u -v ${{secrets.TOMCAT_USER}}:${{secrets.TOMCAT_PASSWORD}}\
+          curl -v -u ${{secrets.TOMCAT_USER}}:${{secrets.TOMCAT_PASSWORD}}\
           -Ttarget/TrainBook-1.0.0-SANPSHOT.war\
           "http://${{secrets.TOMCAT_HOST}}:8080/manager/text/deploy?path=/TrainBook&update=true"
 
