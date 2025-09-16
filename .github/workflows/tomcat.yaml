@@ -23,7 +23,7 @@ jobs:
         # Build with  maven(update)
         - name: Build with maven
           run: mvn clean package
-       # Build wuth sonarqube 
+       # Build with sonarqube 
         - name: Cache SonarQube packages
           uses: actions/cache@v3
           with:
@@ -33,6 +33,6 @@ jobs:
         - name: Run SonarQube Scanner
           run: | 
            mvn clean verify sonar:sonar \
-           - D ${{secrets.SONAR_HOST_URL}}=http://52.221.229.29:9000 \
+           - D ${{secrets.SONAR_HOST_URL}}
            - D ${{secrets.SONAR_TOKEN}}
           
