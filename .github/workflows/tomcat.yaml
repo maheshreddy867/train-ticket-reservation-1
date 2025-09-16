@@ -31,5 +31,6 @@ jobs:
            key: ${{runner.os}}-sonar
 
         - name: Run SonarQube Scanner
-          run: mvn sonar:sonar -Dsonar.host.url="http://${{secrets.SONAR_HOST_URL}}9000 -Dsonar.login=${{secrets.SONAR_TOKEN}}"
+          run: sonar:sonar http://${{secrets.SONAR_HOST_URL}}:9000 \
+            - D sonar.login=${{secrets.SONAR_TOKEN}}
           
