@@ -21,8 +21,11 @@ jobs:
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v2
-        with:
-          projectBaseDir: .
         env:
           SONAR_HOST_URL: ${{secrets.SONAR_HOST_URL}}
           SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
+        with: 
+           args: >
+            -Dsonar.projectKey=train-ticket-reservation
+            -Dsonar.projectName="Train Ticket Reservation"
+            -Dsonar.sources=src
