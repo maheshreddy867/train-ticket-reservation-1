@@ -1,10 +1,9 @@
-name: check the code quality in SonarQube 
+name: SonarQube Scan (Maven)
 
 on:
   push:
     branches:
       - master
- 
 jobs:
   sonarqube:
     runs-on: ubuntu-latest
@@ -19,13 +18,15 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@v2
-        env:
-          SONAR_HOST_URL: ${{secrets.SONAR_HOST_URL}}
-          SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
-        with: 
-           args: >
-            "-Dsonar.projectKey=train-ticket-reservation"
-            "-Dsonar.projectName="Train_Ticket_Reservation"
-            "-Dsonar.sources=src"
+      - name: Cache Maven packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: ${{runner.os}}-m2-${{ hashFiles('**/pom.xml')}}
+          restore-keys: |
+            ${{runner.os}}-m2
+
+      - name: Build with Maven and run SonarQube analysis
+        run: | 
+         mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=train-ticket-reservation 
+         -Dsonar.host.url=${{secrets.SONAR_HOST_URL}} -Dsonar.login=${{secrets.SONAR_TOKEN}}
