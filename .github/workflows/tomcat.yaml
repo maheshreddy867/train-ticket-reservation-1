@@ -26,6 +26,6 @@ jobs:
           SONAR_TOKEN: ${{secrets.SONAR_TOKEN}}
         with: 
            args: >
-            -Dsonar.projectKey=train-ticket-reservation
-            -Dsonar.projectName="Train Ticket Reservation"
-            -Dsonar.sources=src
+            "-Dsonar.projectKey=train-ticket-reservation"
+            "-Dsonar.projectName="Train_Ticket_Reservation"
+            "-Dsonar.sources=src"
