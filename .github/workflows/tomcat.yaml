@@ -32,6 +32,11 @@ jobs:
          -Dsonar.host.url=http://52.221.229.29:9000 \
          -Dsonar.login=${{secrets.SONAR_TOKEN}} \
          -Dsonar.projectKey=train-ticket-reservation
-
+      # deploy to tomcat
+      - name: deploy to tomcat
+        run: |
+          curl -u -v ${{secrets.TOMCAT_USER}}:${{secrets.TOMCAT_PASSWORD}}\
+          -Ttarget/TrainBook-1.0.0-SANPSHOT.war\
+          "http://${{sercets.TOMCAT_HOST}}:8080/manager/text/deploy?path=/TrainBook&update=true"
 
          
