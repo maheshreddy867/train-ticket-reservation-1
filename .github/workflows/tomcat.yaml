@@ -28,7 +28,7 @@ jobs:
 
       - name: Build with Maven and run SonarQube analysis
         run: | 
-         mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=train-ticket-reservation 
+         mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey="train-ticket-reservation" 
          -Dsonar.host.url=${{secrets.SONAR_HOST_URL}} -Dsonar.login=${{secrets.SONAR_TOKEN}}
 
          
