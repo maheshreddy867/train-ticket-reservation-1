@@ -1,4 +1,4 @@
-name: SonarQube Scan (Maven)
+name: CI/CD pipeline
 
 on:
   push:
@@ -18,41 +18,36 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Cache Maven packages
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2
-          key: ${{runner.os}}-m2-${{ hashFiles('**/pom.xml')}}
-          restore-keys: |
-            ${{runner.os}}-m2
-
-      - name: Build with Maven and run SonarQube analysis
-        run: | 
-         mvn clean verify sonar:sonar \
-         -Dsonar.host.url=${{secrets.SONAR_HOST_URL}} \
-         -Dsonar.login=${{secrets.SONAR_TOKEN}} \
-         -Dsonar.projectKey=train-ticket-reservation
+      - name: Build with mvn
+        run: mvn clean pacakage
         
+            
         #Deploy WAR to Tomcat  
       - name: Deploy to tomcat
         run: |
-               curl -v -u ${{secrets.TOMCAT_USER}}:${{secrets.TOMCAT_PASSWORD}} \
+               curl -v -u ${{secrets.TOMCAT_USER1}}:${{secrets.TOMCAT_PASSWORD1}} \
                   -T target/TrainBook-1.0.0-SNAPSHOT.war \
-                  "http://${{secrets.TOMCAT_HOST}}:8080/manager/text/deploy?path=/TrainBook&update=true"
+                   "http://${{secrets.TOMCAT_HOST1}}:8080/manager/text/deploy?path=/TrainBook&update=true"
+                   
+      - name: Deploy to tomcat
+        run: |
+               curl -v -u ${{secrets.TOMCAT_USER2}}:${{secrets.TOMCAT_PASSWORD2}} \
+                  -T target/TrainBook-1.0.0-SNAPSHOT.war \
+                  "http://${{secrets.TOMCAT_HOST2}}:8080/manager/text/deploy?path=/TrainBook&update=true"
                   
-      - name: Set up Snyk CLI
-        uses: snyk/actions/setup@master
+      - name: Deploy to tomcat
+        run: |
+               curl -v -u ${{secrets.TOMCAT_USER3}}:${{secrets.TOMCAT_PASSWORD3}} \
+                  -T target/TrainBook-1.0.0-SNAPSHOT.war \
+                  "http://${{secrets.TOMCAT_HOST3}}:8080/manager/text/deploy?path=/TrainBook&update=true"
 
-      - name: Run Snyk Test
-        run: snyk test --all-projects --severity-threshold=high --json-file-output=snyk-report.json || true
-        env:
-           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-
-      - name: Run Snyk Monitor
-        uses: snyk/actions/maven@master
-        with:
-          command: monitor
-          args: --file=pom.xml
-        env:
-            JAVA_HOME: /opt/java/openjdk
-            SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      - name: Deploy to tomcat
+        run: |
+               curl -v -u ${{secrets.TOMCAT_USER4}}:${{secrets.TOMCAT_PASSWORD4}} \
+                  -T target/TrainBook-1.0.0-SNAPSHOT.war \
+                  "http://${{secrets.TOMCAT_HOST4}}:8080/manager/text/deploy?path=/TrainBook&update=true"
+                  
+                  
+                  
+                  
+     
