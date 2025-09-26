@@ -19,7 +19,7 @@ jobs:
           java-version: '17'
 
       - name: Build with mvn
-        run: mvn clean pacakage
+        run: mvn clean package
         
             
         #Deploy WAR to Tomcat  
