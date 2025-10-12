@@ -25,27 +25,10 @@ jobs:
         #Deploy WAR to Tomcat  
       - name: Deploy to tomcat
         run: |
-               curl -v -u ${{secrets.TOMCAT_USER1}}:${{secrets.TOMCAT_PASSWORD1}} \
+               curl -v -u ${{secrets.TOMCAT_USER}}:${{secrets.TOMCAT_PASSWORD}} \
                   -T target/TrainBook-1.0.0-SNAPSHOT.war \
-                   "http://${{secrets.TOMCAT_HOST1}}:8080/manager/text/deploy?path=/TrainBook&update=true"
+                   "http://${{secrets.TOMCAT_HOST}}:8080/manager/text/deploy?path=/TrainBook&update=true"
                    
-      - name: Deploy to tomcat
-        run: |
-               curl -v -u ${{secrets.TOMCAT_USER2}}:${{secrets.TOMCAT_PASSWORD2}} \
-                  -T target/TrainBook-1.0.0-SNAPSHOT.war \
-                  "http://${{secrets.TOMCAT_HOST2}}:8080/manager/text/deploy?path=/TrainBook&update=true"
-                  
-      - name: Deploy to tomcat
-        run: |
-               curl -v -u ${{secrets.TOMCAT_USER3}}:${{secrets.TOMCAT_PASSWORD3}} \
-                  -T target/TrainBook-1.0.0-SNAPSHOT.war \
-                  "http://${{secrets.TOMCAT_HOST3}}:8080/manager/text/deploy?path=/TrainBook&update=true"
-
-      - name: Deploy to tomcat
-        run: |
-               curl -v -u ${{secrets.TOMCAT_USER4}}:${{secrets.TOMCAT_PASSWORD4}} \
-                  -T target/TrainBook-1.0.0-SNAPSHOT.war \
-                  "http://${{secrets.TOMCAT_HOST4}}:8080/manager/text/deploy?path=/TrainBook&update=true"
                   
                   
 
