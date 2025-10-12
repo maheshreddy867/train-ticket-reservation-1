@@ -18,6 +18,9 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Verify WAR file
+        run: ls -lh target/
+        
       - name: Build with mvn
         run: mvn clean package
         
