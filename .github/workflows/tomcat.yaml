@@ -25,7 +25,7 @@ jobs:
         #Deploy WAR to Tomcat  
       - name: Deploy to tomcat
         run: |
-               curl -v -u username:password \ http://18.183.186.55:8080/
+               curl -v -u username:password  http://18.183.186.55:8080/
                   -T target/TrainBook-1.0.0-SNAPSHOT.war \
                    "http://${{secrets.TOMCAT_HOST}}:8080/manager/text/deploy?path=/TrainBook&update=true"
                    
