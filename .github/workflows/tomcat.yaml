@@ -32,7 +32,7 @@ jobs:
                    "http://${{secrets.TOMCAT_HOST}}:8080/manager/text/deploy?path=/TrainBook&update=true"
 
        #Deploy WAR to Tomcat  
-      - name: Deploy to tomcat
+      - name: Deploy to tomcat_2
         run: |
                curl -v -u ${{secrets.TOMCAT_USER_1}}:${{secrets.TOMCAT_PASSWORD_1}} \
                   -T target/TrainBook-1.0.0-SNAPSHOT.war \
