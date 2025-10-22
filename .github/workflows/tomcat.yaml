@@ -41,4 +41,11 @@ jobs:
         run: |
                curl -v -u ${{secrets.TOMCAT_USER_2}}:${{secrets.TOMCAT_PASSWORD_2}} \
                   -T target/TrainBook-1.0.0-SNAPSHOT.war \
-                   "http://${{secrets.TOMCAT_HOST_2}}:8080/manager/text/deploy?path=/TrainBook&update=true"  
+                   "http://${{secrets.TOMCAT_HOST_2}}:8080/manager/text/deploy?path=/TrainBook&update=true" 
+
+       #Deploy WAR to Tomcat-3 
+      - name: Deploy to tomcat-3
+        run: |
+               curl -v -u ${{secrets.TOMCAT_USER_3}}:${{secrets.TOMCAT_PASSWOR_3}} \
+                  -T target/TrainBook-1.0.0-SNAPSHOT.war \
+                   "http://${{secrets.TOMCAT_HOST_3}}:8080/manager/text/deploy?path=/TrainBook&update=true"
